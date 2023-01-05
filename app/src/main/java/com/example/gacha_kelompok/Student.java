@@ -1,14 +1,16 @@
 package com.example.gacha_kelompok;
 
-public class Item {
+public class Student {
     String name;
     String email;
     String nim;
+    String phone;
 
-    public Item(String name, String email, String nim) {
+    public Student(String name, String email, String nim, String phone) {
         this.name = name;
         this.email = email;
         this.nim = nim;
+        this.phone = phone;
     }
 
     public String getName() {
@@ -33,5 +35,13 @@ public class Item {
 
     public void setNim(String nim) {
         this.nim = nim;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

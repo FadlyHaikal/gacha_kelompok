@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
-    List<Item> items;
+    List<Student> items;
 
-    public MyAdapter(List<Item> items) {
+    public MyAdapter(List<Student> items) {
         this.items = items;
     }
 

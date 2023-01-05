@@ -1,39 +1,70 @@
 package com.example.gacha_kelompok;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Item> data = Arrays.asList(
-            new Item("Jamaludin Asyafaka", "jamaludin.asya@binus.ac.id", "2440724177"),
-            new Item("Valen Setiawan","valen.setiawan@binus.ac.id", "2440862422"),
-            new Item("Evlyn Sucipto","evlyn.sucipto@binus.ac.id", "2660070642"),
-            new Item("Damar Amrullah","damar.amrullah@binus.ac.id", "2440278632"),
-            new Item("Jessica Iska","jessica.iska@binus.ac.id", "2440090892"),
-            new Item("Darrel Aska","darrel.aska@binus.ac.id", "2440088955"),
-            new Item("Tubagus Julfikar","tubagus.julfikar@binus.ac.id", "2441080903"),
-            new Item("Amarudin Akbar","amarudin.akbar@binus.ac.id", "2440084251"),
-            new Item("Selina Nasution","selina.nasution@binus.ac.id", "2440055667"),
-            new Item("Muhammad Akbar","muhammad.akbar@binus.ac.id", "2443120649"),
-            new Item("Andres Solum","andres.solum@binus.ac.id", "2440089646")
-    );
     int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        String url ="https://63b6e4161907f863aa0598c7.mockapi.io/gachaKelompok/students";
+        List<Student> student_list = new ArrayList<Student>();
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for(int i=0; i < response.length(); i++){
+                        JSONObject student = response.getJSONObject(i);
+                        String id = student.getString("id");
+                        String email = student.getString("email");
+                        String phone = student.getString("phone");
+                        String nim = student.getString("nim");
+                        String firstName = student.getString("firstName");
+                        String lastName = student.getString("lastName");
+                        student_list.add(new Student(firstName + " " + lastName, email, nim, phone));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Error Occured", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(request);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<Item> items = new ArrayList<Item>();
-        items.add(new Item("Fadly Haikal", "fadly.haikal@binus.ac.id", "2440070642"));
+        List<Student> items = new ArrayList<Student>();
+        items.add(new Student("Fadly Haikal", "fadly.haikal@binus.ac.id", "2440070642", "08248712452"));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -41,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         findViewById(R.id.random).setOnClickListener(view -> {
-            items.add(data.get(counter%data.size()));
+            items.add(student_list.get(counter%student_list.size()));
             counter++;
             adapter.notifyItemInserted(items.size()-1);
         });
