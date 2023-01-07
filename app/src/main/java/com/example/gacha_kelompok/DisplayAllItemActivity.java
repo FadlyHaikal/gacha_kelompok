@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +17,14 @@ public class DisplayAllItemActivity extends AppCompatActivity {
     public Button remove;
     List<Student> student_list;
     int counter;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        actionBar = getSupportActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.item_main);
         final StudentDataService studentDataService = new StudentDataService(DisplayAllItemActivity.this);
         counter = 0;
@@ -43,5 +47,15 @@ public class DisplayAllItemActivity extends AppCompatActivity {
                 Toast.makeText(DisplayAllItemActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

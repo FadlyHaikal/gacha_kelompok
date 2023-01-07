@@ -3,6 +3,7 @@ package com.example.gacha_kelompok;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,10 +14,14 @@ import java.util.List;
 public class RandomItemActivity extends AppCompatActivity {
     List<Student> student_list;
     int counter;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        actionBar = getSupportActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.item_main);
         final StudentDataService studentDataService = new StudentDataService(RandomItemActivity.this);
         counter = 0;
@@ -42,6 +47,17 @@ public class RandomItemActivity extends AppCompatActivity {
                 Toast.makeText(RandomItemActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 }
