@@ -14,11 +14,12 @@
         android:theme="@style/Theme.Gacha_kelompok"
         tools:targetApi="31">
         <activity
+            android:name=".DisplayAllItemActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".RandomItemActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:exported="true">
         </activity>
         <activity
             android:name=".MainActivity"

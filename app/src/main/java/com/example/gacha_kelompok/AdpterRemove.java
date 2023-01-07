@@ -9,22 +9,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
+public class AdpterRemove extends RecyclerView.Adapter<ViewHolderRemove>{
     List<Student> items;
 
-    public MyAdapter(List<Student> items) {
+    public AdpterRemove(List<Student> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolderRemove onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view, parent, false);
-        return new MyViewHolder(view).linkAdapter(this);
+        return new ViewHolderRemove(view).linkAdapter(this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderRemove holder, int position) {
         holder.nameView.setText(items.get(position).getName());
         holder.nimView.setText(items.get(position).getNim());
         holder.emailView.setText(items.get(position).getEmail());

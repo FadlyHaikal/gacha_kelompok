@@ -1,47 +1,47 @@
 package com.example.gacha_kelompok;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RandomItemActivity extends AppCompatActivity {
+public class DisplayAllItemActivity extends AppCompatActivity {
+    public Button random;
+    public Button remove;
     List<Student> student_list;
     int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_main);
-        final StudentDataService studentDataService = new StudentDataService(RandomItemActivity.this);
+        final StudentDataService studentDataService = new StudentDataService(DisplayAllItemActivity.this);
         counter = 0;
 
-        List<Student> items = new ArrayList<Student>();
+        random = findViewById(R.id.random);
+        random.setVisibility(View.GONE);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        AdpterRemove adapter = new AdpterRemove(items);
-        recyclerView.setAdapter(adapter);
 
         studentDataService.getStudents(new StudentDataService.VolleyResponseListener() {
             @Override
             public void onResponse(List<Student> students) {
                 student_list = students;
-                findViewById(R.id.random).setOnClickListener(view -> {
-                    items.add(student_list.get(counter%student_list.size()));
-                    counter++;
-                    adapter.notifyItemInserted(items.size()-1);}
-                );
+                Adapter adapter = new Adapter(students);
+                recyclerView.setAdapter(adapter);
             }
             @Override
             public void onError(String message) {
-                Toast.makeText(RandomItemActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DisplayAllItemActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

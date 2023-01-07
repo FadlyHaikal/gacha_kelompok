@@ -10,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button btnProfile;
-    public Button btnShowAll;
+    public Button btnDisplayAll;
     public Button btnRandom;
 
     @Override
@@ -20,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnRandom = findViewById(R.id.btnRandom);
+        btnDisplayAll = findViewById(R.id.btnDisplayAll);
 
         btnRandom.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -29,5 +29,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnDisplayAll.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, DisplayAllItemActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 }
