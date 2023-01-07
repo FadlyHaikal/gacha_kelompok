@@ -28,6 +28,7 @@ public class DisplayAllItemActivity extends AppCompatActivity {
         setContentView(R.layout.item_main);
         final StudentDataService studentDataService = new StudentDataService(DisplayAllItemActivity.this);
         counter = 0;
+        setTitle("Display All Student");
 
         random = findViewById(R.id.random);
         random.setVisibility(View.GONE);

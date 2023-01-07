@@ -25,6 +25,7 @@ public class RandomItemActivity extends AppCompatActivity {
         setContentView(R.layout.item_main);
         final StudentDataService studentDataService = new StudentDataService(RandomItemActivity.this);
         counter = 0;
+        setTitle("Random Student");
 
         List<Student> items = new ArrayList<Student>();
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
