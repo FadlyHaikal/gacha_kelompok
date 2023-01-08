@@ -56,7 +56,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public List <UserModel> getOne(String username) {
 
-        List<UserModel> returnList = new ArrayList<>();
+        List<UserModel> returnList = new ArrayList<UserModel>();
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
 
@@ -72,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 UserModel userModel = new UserModel(CustomerId, CustomerName, CustomerEmail, CustomerPassword, CustomerPhone);
                 returnList.add(userModel);
 
-            } while (cursor.moveToFirst());
+            } while (cursor.moveToNext());
 
         } else {
 
@@ -81,14 +81,6 @@ public class DBHelper extends SQLiteOpenHelper {
             MyDB.close();
             return returnList;
     }
-
-//        SQLiteDatabase MyDB = this.getWritableDatabase();
-//        if (cursor.getCount() == 1)
-//            return true;
-//        else
-//            return new UserModel();
-//
-//    }
 
     public Boolean checkusername(String username) {
         SQLiteDatabase MyDB = this.getWritableDatabase();

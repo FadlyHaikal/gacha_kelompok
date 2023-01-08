@@ -49,8 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
                 else if (!(Patterns.EMAIL_ADDRESS.matcher(emailvalue).matches())) {
                     Toast.makeText(RegisterActivity.this, "Email Invalid", Toast.LENGTH_SHORT).show();
                 }
-                else if(!PhoneNumberUtils.isGlobalPhoneNumber(phonevalue)){
-                    Toast.makeText(RegisterActivity.this, "Phone Number Invalid", Toast.LENGTH_SHORT).show();
+                else if ((phonevalue.length() <= 12 || phonevalue.length() >= 16) && (phonevalue.matches("^[0-9-]$"))){
+                    Toast.makeText(RegisterActivity.this, "Input phone between 12 and 16 character", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     if(pass.equals(repass)){

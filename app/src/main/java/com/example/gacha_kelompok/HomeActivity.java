@@ -22,11 +22,13 @@ public class HomeActivity extends AppCompatActivity {
         btnProfile = findViewById(R.id.btnProfile);
         btnRandom = findViewById(R.id.btnRandom);
         btnDisplayAll = findViewById(R.id.btnDisplayAll);
+        String sessionUsername = getIntent().getStringExtra("username");
 
         btnProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                intent.putExtra("username", sessionUsername);
                 startActivity(intent);
             }
         });

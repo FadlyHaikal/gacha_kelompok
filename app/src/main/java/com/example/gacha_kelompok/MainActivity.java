@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     if(checkuserpass==true){
                         Toast.makeText(MainActivity.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
                         Intent intent  = new Intent(getApplicationContext(), HomeActivity.class);
+                        intent.putExtra("username", user);
                         startActivity(intent);
                     }else{
                         Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
