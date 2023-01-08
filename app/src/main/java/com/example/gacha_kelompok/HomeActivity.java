@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public Button btnProfile;
     public Button btnDisplayAll;
     public Button btnRandom;
 
@@ -18,8 +19,17 @@ public class HomeActivity extends AppCompatActivity {
         setTitle("Home");
         setContentView(R.layout.activity_home);
 
+        btnProfile = findViewById(R.id.btnProfile);
         btnRandom = findViewById(R.id.btnRandom);
         btnDisplayAll = findViewById(R.id.btnDisplayAll);
+
+        btnProfile.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnRandom.setOnClickListener(new View.OnClickListener(){
             @Override

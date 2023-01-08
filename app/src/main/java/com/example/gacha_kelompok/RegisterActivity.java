@@ -55,10 +55,10 @@ public class RegisterActivity extends AppCompatActivity {
                 else{
                     if(pass.equals(repass)){
                         Boolean checkuser = DB.checkusername(user);
-//                        Boolean checkemail = DB.checkemail(emailvalue);
-                        if(checkuser==false){
-//                            Toast.makeText(RegisterActivity.this, "pass : "+ pass + " " + user + " " + emailvalue + " " + phonevalue, Toast.LENGTH_SHORT).show();
-                            Boolean insert = DB.insertData(user, pass, emailvalue, phonevalue);
+                        Boolean checkemail = DB.checkemail(emailvalue);
+                        if(checkuser==false && checkemail==false){
+                            UserModel userModel = new UserModel(-1, user, emailvalue, phonevalue, pass);
+                            Boolean insert = DB.addOne(userModel);
                             if(insert==true){
                                 Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }else{
                         Toast.makeText(RegisterActivity.this, "Passwords not matching", Toast.LENGTH_SHORT).show();
                     }
-                } }
+                }}
         });
         signin.setOnClickListener(new View.OnClickListener() {
 
