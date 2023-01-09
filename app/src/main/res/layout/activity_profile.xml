@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:background="#2492D1"
+    android:layout_height="fill_parent">
+
+    <ImageView
+        android:src="@drawable/ic_baseline_account_box_24"
+        android:id="@+id/profile_profileimg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:padding="10dp"
+        tools:context=".ProfileActivity">
+
+
+        <TextView
+            android:id="@+id/nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="User Name"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/gmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nama"
+            android:layout_marginTop="30dp"
+            android:hint="Email"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gmail"
+            android:layout_marginTop="30dp"
+            android:hint="Phone"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mobile"
+            android:layout_marginTop="30dp"
+            android:text="Update Profile" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnUpdate"
+            android:layout_marginTop="30dp"
+            android:text="Log out"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
