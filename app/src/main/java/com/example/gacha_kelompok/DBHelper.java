@@ -40,7 +40,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean addOne(UserModel userModel){
-
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", userModel.getUsername());
@@ -51,35 +50,52 @@ public class DBHelper extends SQLiteOpenHelper {
         if (result == -1) return false;
         else
             return true;
-
     }
 
-    public List <UserModel> getOne(String username) {
-
-        List<UserModel> returnList = new ArrayList<UserModel>();
+    public boolean updateOne(UserModel userModel){
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", userModel.getUsername());
+        contentValues.put("password", userModel.getPassword());
+        contentValues.put("email", userModel.getEmail());
+        contentValues.put("phone", userModel.getPhone());
+
+        long result = MyDB.update("users", contentValues, "id=?", new String[]{String.valueOf(userModel.getId())});
+        if (result == -1) return false;
+        else
+            return true;
+    }
+
+    public UserModel getOne(String username, String id) {
+        UserModel user = new UserModel(-1, "error", "error", "error", "error");
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor;
+        if(id != "-1"){
+            cursor = MyDB.rawQuery("Select * from users where id = ?", new String[]{id});
+        } else {
+            cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{username});
+        }
 
         if (cursor.moveToFirst()) {
 
             do {
                 int CustomerId = cursor.getInt(0);
                 String CustomerName = cursor.getString(1);
-                String CustomerEmail = cursor.getString(2);
-                String CustomerPassword = cursor.getString(3);
-                String CustomerPhone = cursor.getString(4);
+                String CustomerPhone = cursor.getString(2);
+                String CustomerEmail = cursor.getString(3);
+                String CustomerPassword = cursor.getString(4);
 
-                UserModel userModel = new UserModel(CustomerId, CustomerName, CustomerEmail, CustomerPassword, CustomerPhone);
-                returnList.add(userModel);
+                user = new UserModel(CustomerId, CustomerName, CustomerEmail, CustomerPassword, CustomerPhone);
 
             } while (cursor.moveToNext());
+
 
         } else {
 
         }
             cursor.close();
             MyDB.close();
-            return returnList;
+            return user;
     }
 
     public Boolean checkusername(String username) {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -18,17 +19,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Home");
         setContentView(R.layout.activity_home);
-
         btnProfile = findViewById(R.id.btnProfile);
         btnRandom = findViewById(R.id.btnRandom);
         btnDisplayAll = findViewById(R.id.btnDisplayAll);
-        String sessionUsername = getIntent().getStringExtra("username");
+        String sessionId = getIntent().getStringExtra("sessionId");
 
         btnProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
-                intent.putExtra("username", sessionUsername);
+                intent.putExtra("sessionId", sessionId);
                 startActivity(intent);
             }
         });

@@ -43,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
                     Boolean checkuserpass = DB.checkusernamepassword(user, pass);
                     if(checkuserpass==true){
                         Toast.makeText(MainActivity.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
+                        UserModel userModel = DB.getOne(user, "-1");
                         Intent intent  = new Intent(getApplicationContext(), HomeActivity.class);
-                        intent.putExtra("username", user);
+                        intent.putExtra("sessionId", String.valueOf(userModel.getId()));
                         startActivity(intent);
                     }else{
                         Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

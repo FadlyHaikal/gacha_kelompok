@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText username, password, phone, email,  repassword;
+    EditText username, password, phone, email, repassword;
     Button signup, signin;
     DBHelper DB;
     ActionBar actionBar;

@@ -7,6 +7,7 @@ import android.content.SearchRecentSuggestionsProvider;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,32 +16,31 @@ import java.util.List;
 public class ProfileActivity extends AppCompatActivity {
 
     ActionBar actionBar;
-    public Button btnLogout;
+    public Button btnLogout, btnUpdate;
     DBHelper DB;
-    TextView username, password, email, phone;
+    EditText username, email, phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         setTitle("Profile");
         DB = new DBHelper(this);
-        String sessionUsername = getIntent().getStringExtra("username");
-        List <UserModel> users = DB.getOne(sessionUsername);
-        UserModel user = users.get(0);
-//        Toast.makeText(this, sessionUsername, Toast.LENGTH_SHORT).show();
+        String sessionId = getIntent().getStringExtra("sessionId");
+        UserModel user = DB.getOne("-1", sessionId);
         actionBar = getSupportActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        username = (TextView)findViewById(R.id.nama);
+        username = (EditText)findViewById(R.id.nama);
         username.setText(user.getUsername());
-        email = (TextView)findViewById(R.id.gmail);
+        email = (EditText)findViewById(R.id.gmail);
         email.setText(user.getEmail());
-        phone = (TextView)findViewById(R.id.mobile);
+        phone = (EditText)findViewById(R.id.mobile);
         phone.setText(user.getPhone());
 
         btnLogout = findViewById(R.id.btnLogout);
+        btnUpdate = findViewById(R.id.btnUpdate);
 
         btnLogout.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -49,7 +49,41 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnUpdate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                String phoneValue = phone.getText().toString();
+                String emailValue = email.getText().toString();
+                String usernameValue = username.getText().toString();
 
+                UserModel oldUser = DB.getOne("-1", sessionId);
+
+                if(oldUser.getEmail().equals(emailValue) && oldUser.getUsername().equals(usernameValue) && oldUser.getPhone().equals(phoneValue)){
+                    return;
+                }
+
+                Boolean checkEmail = DB.checkemail(emailValue);
+                if(!oldUser.getEmail().equals(emailValue) && checkEmail){
+                    Toast.makeText(ProfileActivity.this, "Email already taken", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Boolean checkUsername = DB.checkusername(usernameValue);
+                if(!oldUser.getUsername().equals(usernameValue) && checkUsername){
+                    Toast.makeText(ProfileActivity.this, "Username already taken", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                UserModel updatedUser = new UserModel(user.getId(), usernameValue, emailValue, phoneValue, user.getPassword());
+                Boolean isSuccess = DB.updateOne(updatedUser);
+                if(isSuccess) {
+                    oldUser = updatedUser;
+                    Toast.makeText(ProfileActivity.this, "Update successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Update failed from DB Insert", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     @Override

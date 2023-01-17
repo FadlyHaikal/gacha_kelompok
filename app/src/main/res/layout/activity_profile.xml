@@ -19,37 +19,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:padding="10dp"
         tools:context=".ProfileActivity">
 
-
-        <TextView
+        <EditText
             android:id="@+id/nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:hint="User Name"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
 
-        <TextView
+        <EditText
             android:id="@+id/gmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/nama"
             android:layout_marginTop="30dp"
             android:hint="Email"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
 
-        <TextView
+        <EditText
             android:id="@+id/mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/gmail"
             android:layout_marginTop="30dp"
             android:hint="Phone"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:autofillHints=""
+            android:inputType="text" />
 
         <Button
             android:id="@+id/btnUpdate"
@@ -64,9 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnUpdate"
-            android:layout_marginTop="30dp"
-            android:text="Log out"
-            />
+            android:layout_marginTop="10dp"
+            android:text="Log out" />
 
 
     </RelativeLayout>
