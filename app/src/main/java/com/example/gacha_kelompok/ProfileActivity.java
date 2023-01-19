@@ -64,6 +64,11 @@ public class ProfileActivity extends AppCompatActivity {
                     return;
                 }
 
+                if(phoneValue.equals("")||emailValue.equals("")||usernameValue.equals("")){
+                    Toast.makeText(ProfileActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!oldUser.getEmail().equals(emailValue) && !(Patterns.EMAIL_ADDRESS.matcher(emailValue).matches())) {
                     Toast.makeText(ProfileActivity.this, "Email Invalid", Toast.LENGTH_SHORT).show();
                     return;
