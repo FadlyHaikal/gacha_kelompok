@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2492D1"
+    android:background="#5F6BFB"
     android:hapticFeedbackEnabled="true"
     android:orientation="vertical"
     android:scrollbarTrackHorizontal="@android:drawable/arrow_down_float"

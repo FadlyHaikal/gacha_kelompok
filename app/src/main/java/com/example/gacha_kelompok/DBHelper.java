@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String DBNAME = "Gacha_Kelompok.db";
+    public static final String DBNAME = "GachaKelompok.db";
 
     public DBHelper(Context context) {
-        super(context, "Gacha_Kelompok.db", null, 1);
+        super(context, "GachaKelompok.db", null, 1);
     }
 
     @Override

@@ -62,6 +62,5 @@ public class StudentDataService {
         });
 
         MySingleton.getInstance(ctx).addToRequestQueue(request);
-
     }
 }

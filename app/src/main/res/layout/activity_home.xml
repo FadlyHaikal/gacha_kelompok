@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2492D1"
+    android:background="#EFF0FC"
     android:orientation="vertical"
     android:scrollbarTrackHorizontal="@android:drawable/arrow_down_float"
     tools:context=".HomeActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/top_background1" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="148dp"
+        android:layout_height="226dp"
+        android:layout_alignTop="@+id/btnProfile"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="-240dp"
+        android:layout_marginEnd="131dp"
+        app:srcCompat="@drawable/roulette"/>
+
     <Button
         android:id="@+id/btnProfile"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="334dp"
         android:text="Profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,9 +48,11 @@
 
     <Button
         android:id="@+id/btnDisplayAll"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_below="@+id/btnProfile"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="-320dp"
         android:layout_marginEnd="15dp"
         android:text="Display All Student"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,12 +63,14 @@
         app:layout_constraintVertical_bias="0.478" />
 
     <Button
-        android:onClick="randomItemActivityFunction"
         android:id="@+id/btnRandom"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_below="@+id/btnDisplayAll"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="15dp"
+        android:onClick="randomItemActivityFunction"
         android:text="Random"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,4 +79,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.637" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>

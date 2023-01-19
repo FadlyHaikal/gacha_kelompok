@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SearchRecentSuggestionsProvider;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,11 +64,22 @@ public class ProfileActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (!oldUser.getEmail().equals(emailValue) && !(Patterns.EMAIL_ADDRESS.matcher(emailValue).matches())) {
+                    Toast.makeText(ProfileActivity.this, "Email Invalid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!oldUser.getPhone().equals(phoneValue) && (phoneValue.length() < 10 || phoneValue.length() > 15) && android.util.Patterns.PHONE.matcher(phoneValue).matches()){
+                    Toast.makeText(ProfileActivity.this, "Phone number Invalid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Boolean checkEmail = DB.checkemail(emailValue);
                 if(!oldUser.getEmail().equals(emailValue) && checkEmail){
                     Toast.makeText(ProfileActivity.this, "Email already taken", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 Boolean checkUsername = DB.checkusername(usernameValue);
                 if(!oldUser.getUsername().equals(usernameValue) && checkUsername){
                     Toast.makeText(ProfileActivity.this, "Username already taken", Toast.LENGTH_SHORT).show();
@@ -79,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
                     oldUser = updatedUser;
                     Toast.makeText(ProfileActivity.this, "Update successfully", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ProfileActivity.this, "Update failed from DB Insert", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
                 }
 
             }
